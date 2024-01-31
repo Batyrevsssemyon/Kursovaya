@@ -82,6 +82,8 @@ DATABASES = {
     }
 }
 
+# postgres://kursovaya_postgres_user:lAPjD5MlfLn9tSBRF55G1yxLSGfUVBGw@dpg-cmsqqha1hbls73cku9h0-a.oregon-postgres.render.com/kursovaya_postgres
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
