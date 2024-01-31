@@ -1,0 +1,36 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+    <form action='/check' method="POST">
+        {% csrf_token %}
+        <div style="text-align: center; margin-top: 40px; margin-left: 97px; margin-right: 97px;">
+            <div class="list-container" style="padding-left: 12%; margin-top: 40px;" >
+                {% for d in data %}
+                    <div class="td">
+                        <img src='{{d.image}}'>
+                        <p class="truncate">{{d.title}}</p>
+                        <p>Цена: {{d.amount}} руб</p>
+                        <p>В наличии: {{d.quantity}}</p>
+                        <div class="counter-container">
+                            <input type="button" value="-" class="but" name="min{{d.id}}" id="min{{d.id}}" disabled onclick="minus({{d.quantity}}, {{d.id}})">
+                            <input type="text" readonly class="num" name='num{{d.id}}' id='num{{d.id}}' value="0">
+                            <input type="button" value="+" class="but" name="plus{{d.id}}" id="plus{{d.id}}" onclick="plus({{d.quantity}}, {{d.id}})">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <label style="margin-top: 30px; margin-left: 97px; font-size:18px;">Выберите адрес доставки:</label><br>
+        <select name='address' style="margin-top: 10px; margin-left: 97px; display: flex; direction: row">
+            <option value="г Кемерово, б-р Строителей, 15;55.349829069360651;86.159655499999961">г Кемерово, б-р Строителей, 15</option>
+            <option value="г Кемерово, пр-кт Кузнецкий, 80А;55.345897569380231;86.062763499999931">г Кемерово, пр-кт Кузнецкий, 80А</option>
+            <option value="г Кемерово, пр-кт Ленина, 106;55.345329569378781;86.14315351">г Кемерово, пр-кт Ленина, 106</option>
+            <option value="г Кемерово, пр-кт Ленина, 61;55.344167569375741;86.099683999999951">г Кемерово, пр-кт Ленина, 61</option>
+            <option value="г Кемерово, пр-кт Ленинградский, 16;55.3578130693811451;86.166303499999941">г Кемерово, пр-кт Ленинградский, 16</option>
+        </select>
+        <input type="submit" value="Оформить заказ" style="margin: 20px; margin-left: 1280px">
+    </form>
+
+{% endblock %}

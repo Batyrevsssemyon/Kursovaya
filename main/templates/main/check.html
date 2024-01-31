@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Проверка {% endblock %}
+
+{% block content %}
+    <form method="POST" action="/response">
+        {% csrf_token %}
+        {% for product in products %}
+            <label>{{product.title}} - {{product.amount}} руб. - {{product.quantity}} шт.</label><br>
+        {% endfor %}
+        <label>Адрес доставки: {{order.address}}</label><br>
+        <label>Итого: {{total}} руб.</label><br>
+        <input type="submit" value="Подтвердить заказ">
+    </form>
+{% endblock %}

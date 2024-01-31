@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Ответ {% endblock %}
+
+{% block content %}
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=3585c1c7-10ad-45c2-93cf-28c62f159ed4&lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        function init () {
+
+                var myMap = new ymaps.Map('map', {
+                    center: [parseFloat({{latitude}}), parseFloat({{longitude}})],
+
+                    zoom: 16
+                });
+
+                myPlacemark = new ymaps.Placemark([parseFloat({{latitude}}), parseFloat({{longitude}})], {
+			        balloonContent: "<div class='ya_map'>{{address}}</div>"
+                }, {
+                    preset: "twirl#redDotIcon"
+                });
+
+                myMap.geoObjects.add(myPlacemark);
+		        myPlacemark.balloon.open();
+
+
+        }
+    </script>
+    <h6 style="margin: 40px; margin-left: 97px">Заказ будет доставлен по адресу: {{address}}</h6>
+    <div id="map" style="width:600px; height:400px; margin-top: 20px; margin-left: 97px;"></div>
+    <form action="/">
+        <input type="submit" value="Вернуться на главную" style="margin: 40px; margin-left: 97px">
+    </form>
+{% endblock %}
